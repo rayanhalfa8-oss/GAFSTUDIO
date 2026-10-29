@@ -112,6 +112,10 @@ img{display:block;max-width:100%}
   transform:translate3d(calc(var(--mx,0) * -22px),calc(var(--my,0) * -14px + var(--sy,0px)),0)}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:85% 18%;transform-origin:68% 30%;display:block;
   animation:heroIn 2.2s cubic-bezier(.16,.8,.24,1) both, drift 22s 2.2s ease-in-out infinite alternate}
+/* photo vivante : même cadrage et mêmes animations que l'image, dessinée par-dessus */
+.hero-media canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transform-origin:68% 30%;
+  animation:heroIn 2.2s cubic-bezier(.16,.8,.24,1) both, drift 22s 2.2s ease-in-out infinite alternate;opacity:0}
+.hero-media canvas.on{opacity:1}
 @keyframes heroIn{from{transform:scale(1.18);filter:blur(10px) brightness(1.25) saturate(.7)}to{transform:scale(1.04);filter:none}}
 @keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.11) translate(-1.6%,-.8%)}}
 /* ظل خفيف على اليسار لقراءة النص + vignette */
@@ -1039,7 +1043,7 @@ p{text-wrap:pretty}
 <main id="main">
 <section class="hero" id="hero" style="padding:0">
   <div class="hero-frame">
-    <div class="hero-media"><img id="heroImg" alt="Trois femmes en pyjamas GAF STUDIO qui rient ensemble" fetchpriority="high"></div>
+    <div class="hero-media"><img id="heroImg" alt="Trois femmes en pyjamas GAF STUDIO qui rient ensemble" fetchpriority="high"><canvas id="heroLive" aria-hidden="true"></canvas></div>
     <div class="hero-shade"></div>
     <div class="hero-light"></div>
     <canvas class="hero-snow" id="snow" aria-hidden="true"></canvas>
@@ -1982,6 +1986,87 @@ $('#noticeClose').addEventListener('click',()=>{ $('#notice').classList.add('hid
    ========================================================= */
 const hero=$('#hero'), reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 $('#heroImg').src = HERO_IMAGE;
+
+/* =========================================================
+   😄 Hero vivant : les trois filles rient doucement
+   La photo n'est pas modifiée : seules les têtes et les épaules bougent de quelques pixels
+   (déformation locale en WebGL). Sans WebGL ou avec « réduire les animations », la photo reste fixe.
+   ========================================================= */
+(function(){
+  const cv=$('#heroLive'), still=$('#heroImg');
+  if(!cv || reduce) return;
+  const gl=cv.getContext('webgl',{alpha:false,antialias:false,preserveDrawingBuffer:false}); if(!gl){ cv.remove(); return; }
+  const VS='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  const FS=`precision highp float;
+uniform sampler2D tex; uniform vec2 C,I,O; uniform float S;
+uniform vec2 hc[3],hq[3],ht[3],bc[3],bt[3]; uniform float hs[3],ha[3],bs[3];
+void main(){
+  vec2 c=vec2(gl_FragCoord.x,C.y-gl_FragCoord.y);
+  vec2 x=(c-O)/S, d=vec2(0.);
+  for(int i=0;i<3;i++){
+    vec2 r=x-hc[i]; float w=exp(-dot(r,r)/(2.*hs[i]*hs[i]));
+    vec2 q=x-hq[i]; float cs=cos(ha[i]), sn=sin(ha[i]);
+    d+=w*(vec2(cs*q.x-sn*q.y,sn*q.x+cs*q.y)-q+ht[i]);
+    vec2 rb=x-bc[i]; d+=exp(-dot(rb,rb)/(2.*bs[i]*bs[i]))*bt[i];
+  }
+  gl_FragColor=texture2D(tex,clamp((x-d)/I,0.,1.));
+}`;
+  const sh=(t,src)=>{ const s=gl.createShader(t); gl.shaderSource(s,src); gl.compileShader(s); return gl.getShaderParameter(s,gl.COMPILE_STATUS)?s:null; };
+  const vs=sh(gl.VERTEX_SHADER,VS), fs=sh(gl.FRAGMENT_SHADER,FS); if(!vs||!fs){ cv.remove(); return; }
+  const pr=gl.createProgram(); gl.attachShader(pr,vs); gl.attachShader(pr,fs); gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){ cv.remove(); return; }
+  gl.useProgram(pr);
+  gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const aP=gl.getAttribLocation(pr,'p'); gl.enableVertexAttribArray(aP); gl.vertexAttribPointer(aP,2,gl.FLOAT,false,0,0);
+  const U=n=>gl.getUniformLocation(pr,n);
+
+  /* ✏️ repères dans la photo (en fraction de la largeur / hauteur) : centre de la tête, cou (pivot), buste */
+  const GIRLS=[
+    {head:[.535,.19], neck:[.545,.29], body:[.53,.55], r:.057, ph:0.0, period:6.4},   // à gauche (cache-oreilles)
+    {head:[.675,.18], neck:[.69,.30],  body:[.70,.55], r:.060, ph:2.3, period:7.1},   // au centre (écharpe)
+    {head:[.885,.18], neck:[.87,.31],  body:[.89,.60], r:.063, ph:4.1, period:5.8}];  // à droite (bonnet)
+  let IW=1,IH=1, ready=false, vis=true, raf=0;
+  const tex=gl.createTexture(), src=new Image();
+  src.onload=()=>{ IW=src.naturalWidth; IH=src.naturalHeight;
+    gl.bindTexture(gl.TEXTURE_2D,tex);
+    [gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.CLAMP_TO_EDGE));
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,src);
+    const px=(a)=>[a[0]*IW,a[1]*IH];
+    gl.uniform2fv(U('hc'),GIRLS.flatMap(g=>px(g.head))); gl.uniform2fv(U('hq'),GIRLS.flatMap(g=>px(g.neck)));
+    gl.uniform2fv(U('bc'),GIRLS.flatMap(g=>px(g.body)));
+    gl.uniform1fv(U('hs'),GIRLS.map(g=>g.r*IW)); gl.uniform1fv(U('bs'),GIRLS.map(g=>g.r*IW*2));
+    gl.uniform2f(U('I'),IW,IH);
+    ready=true; fit(); loop(performance.now()); };
+  src.src=HERO_IMAGE;
+
+  function fit(){
+    const dpr=Math.min(devicePixelRatio||1,2), w=Math.max(1,Math.round(cv.clientWidth*dpr)), h=Math.max(1,Math.round(cv.clientHeight*dpr));
+    if(cv.width!==w||cv.height!==h){ cv.width=w; cv.height=h; }
+    gl.viewport(0,0,w,h);
+    const s=Math.max(w/IW,h/IH);   /* = object-fit: cover ; object-position: 85% 18% */
+    gl.uniform2f(U('C'),w,h); gl.uniform1f(U('S'),s); gl.uniform2f(U('O'),(w-IW*s)*.85,(h-IH*s)*.18);
+  }
+  addEventListener('resize',()=>{ if(ready) fit(); });
+
+  const env=(t,g)=>{ const c=((t+g.ph)%g.period)/g.period; const k=Math.min(1,c/.45); return c<.45?Math.pow(Math.sin(Math.PI*k),2):0; };
+  function draw(ms){
+    const t=ms/1000, ha=[], ht=[], bt=[], u=IW/1672;   /* amplitudes réglées pour une photo de 1672 px */
+    GIRLS.forEach(g=>{
+      const e=env(t,g), gig=e*(.5-.5*Math.cos(2*Math.PI*3.1*(t+g.ph)));       /* petits rebonds du rire */
+      ha.push(.010*Math.sin(.85*t+g.ph) + e*.022*Math.sin(2*Math.PI*1.4*t+g.ph));   /* tête qui penche */
+      ht.push(.9*u*Math.sin(.7*t+g.ph), -gig*5*u);
+      bt.push(0, -gig*2.2*u + .9*u*Math.sin(1.1*t+g.ph*1.7));                   /* épaules + respiration */
+    });
+    gl.uniform1fv(U('ha'),ha); gl.uniform2fv(U('ht'),ht); gl.uniform2fv(U('bt'),bt);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    if(!cv.classList.contains('on')){ cv.classList.add('on'); still.style.visibility='hidden'; }
+  }
+  function loop(ms){ cancelAnimationFrame(raf); if(!ready||!vis||document.hidden) return; draw(ms); raf=requestAnimationFrame(loop); }
+  new IntersectionObserver(([en])=>{ vis=en.isIntersecting; if(vis) loop(performance.now()); }).observe(cv);
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) loop(performance.now()); });
+  cv.addEventListener('webglcontextlost',e=>{ e.preventDefault(); ready=false; cancelAnimationFrame(raf); still.style.visibility=''; cv.classList.remove('on'); });
+})();
 /* parallax بالماوس (حركة ناعمة بالـ lerp) */
 let tx=0,ty=0,mx=0,my=0;
 hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect(); tx=(e.clientX-r.left)/r.width-.5; ty=(e.clientY-r.top)/r.height-.5;});
