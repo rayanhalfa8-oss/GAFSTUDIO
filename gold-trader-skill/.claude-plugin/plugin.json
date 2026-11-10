@@ -1,0 +1,7 @@
+{
+  "name": "gold-trader-skill",
+  "description": "9 Claude skills for gold (XAUUSD) traders: economic calendar, news, macro drivers, CFTC positioning, position size, risk check, journal, market sessions and a daily brief. Context and arithmetic only: never touches your strategy, never places orders.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": ["gold", "xauusd", "trading", "fundamentals", "economic-calendar", "cot", "risk-management", "journal"]
+}

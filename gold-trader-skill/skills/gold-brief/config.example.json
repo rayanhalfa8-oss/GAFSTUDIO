@@ -1,0 +1,16 @@
+{
+  "timezone": "Africa/Casablanca",
+  "account_balance": 1000,
+  "risk_percent": 1.0,
+  "max_risk_percent": 1.0,
+  "contract_size": 100,
+  "min_lot": 0.01,
+  "lot_step": 0.01,
+  "max_lot": 100,
+  "leverage": 100,
+  "min_rr": 1.5,
+  "max_trades_per_day": 3,
+  "max_daily_loss_percent": 3.0,
+  "news_blackout_minutes": 15,
+  "max_spread": 0.5
+}

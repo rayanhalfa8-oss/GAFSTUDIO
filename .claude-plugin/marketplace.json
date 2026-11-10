@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "gold-trader-skill",
+  "description": "Gold (XAUUSD) skill pack for Claude",
+  "owner": { "name": "GAFSTUDIO" },
+  "plugins": [
+    {
+      "name": "gold-trader-skill",
+      "description": "9 skills for gold traders: calendar, news, macro, COT, sizing, risk, journal, sessions, daily brief.",
+      "source": "./gold-trader-skill",
+      "category": "productivity"
+    }
+  ]
+}
