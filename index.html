@@ -984,7 +984,7 @@ p{text-wrap:pretty}
     </div>
     <div class="notice-actions">
       <a href="#produits" class="btn btn-pink">Voir les offres</a>
-      <button class="btn btn-line" id="noticeClose">Continuer mes achats</button>
+      <button class="btn btn-line" id="noticeClose" aria-label="Fermer ce bandeau">J'ai compris</button>
     </div>
   </div>
 </div>
@@ -1109,7 +1109,7 @@ p{text-wrap:pretty}
           <select id="fColor"><option value="">Toutes</option></select></label>
         <label class="sel"><span>Prix</span>
           <select id="fPrice"><option value="">Tous</option><option value="0-399">Moins de 400 DH</option><option value="400-599">400 – 599 DH</option><option value="600-99999">600 DH et plus</option></select></label>
-        <button class="reset" id="fReset" hidden>Effacer</button>
+        <button class="reset" id="fReset" hidden>Effacer les filtres</button>
       </div>
       <div class="sort">
         <span class="count" id="count"></span>
@@ -1263,7 +1263,7 @@ p{text-wrap:pretty}
       <details><summary>La livraison est-elle offerte ?</summary>
         <p>Oui, dès le 2<sup>e</sup> article (ou dès 500 DH d'achat). Votre panier vous indique en temps réel si la livraison est déjà offerte.</p></details>
       <details><summary>Comment passer ma commande ?</summary>
-        <p>Choisissez votre couleur et votre taille, puis cliquez sur « Commander ». Un message WhatsApp déjà rempli s'ouvre avec votre commande : il ne vous reste qu'à ajouter votre nom et votre adresse. Nous vous confirmons la commande rapidement.</p></details>
+        <p>Choisissez votre couleur et votre taille, ajoutez l'article au panier, puis cliquez sur « Passer ma commande ». Indiquez votre nom, votre téléphone et votre adresse : votre commande s'ouvre dans WhatsApp, déjà rédigée. Appuyez sur « Envoyer » et nous vous la confirmons rapidement.</p></details>
       <details><summary>Comment connaître la matière et l'entretien ?</summary>
         <p>Chaque fiche produit détaille la matière, la coupe et les conseils d'entretien. Cliquez sur la photo d'un article pour tout voir, et zoomez sur la galerie pour apprécier la texture.</p></details>
       <details><summary>Puis-je offrir un article ?</summary>
@@ -1321,7 +1321,7 @@ p{text-wrap:pretty}
   <div class="upsell" id="upsell" hidden></div>
   <div class="drawer-foot">
     <div class="total"><span>Sous-total</span><span id="total">0 DH</span></div>
-    <small>Taxes incluses. Frais de livraison calculés à l'étape suivante.</small>
+    <small>Livraison offerte dès 2 articles. Sinon, les frais vous sont confirmés sur WhatsApp avant l'envoi.</small>
     <button class="btn btn-dark" id="checkout">Passer ma commande</button>
     <p class="secure">Commande confirmée par WhatsApp · vous payez à la réception</p>
   </div>
@@ -1430,7 +1430,7 @@ p{text-wrap:pretty}
     <h2>Merci <span id="doneName"></span></h2>
     <p>Votre commande <b id="doneRef"></b> a été préparée dans WhatsApp. <b>Appuyez sur « Envoyer »</b> dans WhatsApp pour la valider : nous vous confirmons la commande rapidement.</p>
     <p class="co-sub">WhatsApp ne s'est pas ouvert ? <a href="#" id="doneRetry">Cliquez ici pour réessayer</a>.</p>
-    <button class="btn btn-dark" id="doneClose">Continuer mes achats</button>
+    <button class="btn btn-dark" id="doneClose">Revenir à la boutique</button>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -1646,7 +1646,7 @@ function render(){
       <div class="prices">${priceHTML(p)}</div>
       ${p.old?`<div class="save">Vous économisez ${money(p.old-p.price)}</div>`:''}
       <div class="sizes-mini">${p.sizes.filter(s=>!p.soldout.includes(s)).join(' · ')}</div>
-    </article>`).join('') : `<p class="empty-res">${q==='coffret'?'Nos coffrets cadeaux arrivent bientôt.<br>En attendant, découvrez nos pyjamas et nos peignoirs.':showWish?'Vous n\'avez plus d\'article en favori.':'Aucun article ne correspond à votre sélection.'}<br><button class="link-u" style="margin-top:14px" onclick="resetFilters()">Voir toute la collection</button></p>`;
+    </article>`).join('') : `<p class="empty-res">${q==='coffret'?'Nos coffrets cadeaux arrivent bientôt.<br>En attendant, découvrez nos pyjamas et nos peignoirs.':showWish?'Vous n\'avez plus d\'article en favori. Touchez le cœur d\'un article pour le retrouver ici.':q?`Aucun article ne correspond à « ${esc(query.trim())} ». Essayez un autre mot, par exemple « pyjama » ou « rose ».`:'Aucun article ne correspond à ces filtres. Essayez une autre taille ou une autre couleur.'}<br><button class="link-u" style="margin-top:14px" onclick="resetFilters()">Voir toute la collection</button></p>`;
   watch();
 }
 function resetFilters(){ ['fMat','fSize','fColor','fPrice'].forEach(id=>$('#'+id).value=''); query=''; showWish=false; $('#searchInput').value=''; render(); }
@@ -1698,12 +1698,12 @@ $('#qv').addEventListener('click',e=>{
 $('#qvMinus').addEventListener('click',()=>{qv.qty=Math.max(1,qv.qty-1);drawQV();});
 $('#qvPlus').addEventListener('click',()=>{qv.qty=Math.min(10,qv.qty+1);drawQV();});
 $('#qvAdd').addEventListener('click',()=>{
-  if(!qv.size){ const r=$('#qvSizes'); r.classList.remove('shake'); void r.offsetWidth; r.classList.add('shake'); return toast('Veuillez choisir une taille'); }
+  if(!qv.size){ const r=$('#qvSizes'); r.classList.remove('shake'); void r.offsetWidth; r.classList.add('shake'); return toast('Choisissez votre taille pour continuer. Un doute ? Le guide des tailles est juste au-dessus.'); }
   addToCart(qv.p.id, qv.size, qv.p.colors[qv.color]?.name||'', qv.qty); closeQV(); setTimeout(openCart,250);
 });
 /* ---------- commande express : ajoute l'article puis envoie la commande sur WhatsApp ---------- */
 $('#qvExpress').addEventListener('click',()=>{
-  if(!qv.size){ const r=$('#qvSizes'); r.classList.remove('shake'); void r.offsetWidth; r.classList.add('shake'); return toast('Veuillez choisir une taille'); }
+  if(!qv.size){ const r=$('#qvSizes'); r.classList.remove('shake'); void r.offsetWidth; r.classList.add('shake'); return toast('Choisissez votre taille pour continuer. Un doute ? Le guide des tailles est juste au-dessus.'); }
   addToCart(qv.p.id, qv.size, qv.p.colors[qv.color]?.name||'', qv.qty); closeQV(); orderWhatsApp();
 });
 /* ---------- guide des tailles ---------- */
@@ -1723,7 +1723,7 @@ function addToCart(id,size,color,qty=1){
   const key=`${id}|${size}|${color}`, it=cart.find(i=>i.key===key);
   it ? it.qty+=qty : cart.push({key,id,size,color,qty});
   store.set('gaf_cart',cart); updateCart(true);
-  toast(`${getP(id).name} (${size}) — ajouté au panier`);
+  toast(`Ajouté au panier : ${getP(id).name}, taille ${size}${color?' · '+color:''}`);
 }
 function setQty(key,d){
   const it=cart.find(i=>i.key===key); if(!it) return;
@@ -1744,7 +1744,7 @@ function updateCart(bump){
     : `Ajoutez <b>un 2<sup>e</sup> article</b> et la livraison est offerte !`;
   $('#shipFill').style.width = (free?100:Math.max(n/FREE_SHIP_ITEMS, sum/FREE_SHIP)*100)+'%';
   $('#items').innerHTML = !cart.length
-    ? `<div class="empty"><p>Votre panier est vide.</p><button class="btn btn-line" onclick="closeCart()">Continuer mes achats</button></div>`
+    ? `<div class="empty"><p>Votre panier est vide.</p><p style="font-size:.86rem;margin-top:6px">Choisissez un pyjama ou un peignoir : la livraison est offerte dès 2 articles.</p><button class="btn btn-line" onclick="closeCart();document.querySelector('#produits').scrollIntoView({behavior:'smooth'})">Découvrir la collection</button></div>`
     : cart.map(i=>{const p=getP(i.id); return `
       <div class="item">
         <div class="item-media">${(()=>{const src=(p.colors.find(c=>c.name===i.color)||{}).img||p.images[0]; return src?`<img src="${src}" alt="">`:`<div class="ph ph-soft">${IMG}</div>`})()}</div>
@@ -1784,7 +1784,7 @@ function drawCheckout(){
   $('#coHint').innerHTML = t.free ? '' : `Ajoutez un 2<sup>e</sup> article pour profiter de la livraison offerte.`;
 }
 function openCheckout(){
-  if(!cart.length) return toast('Votre panier est vide.');
+  if(!cart.length) return toast('Votre panier est vide : ajoutez un article pour passer commande.');
   closeCart(); closeMenu();
   const saved=store.get('gaf_client',{}), f=$('#coForm');
   ['nom','tel','ville','adresse','autreVille'].forEach(k=>{ if(saved[k] && f[k]) f[k].value=saved[k]; });
@@ -1803,8 +1803,8 @@ function validate(f){
   let ok=true;
   const set=(name,msg)=>{ const el=f[name].closest('.f'); el.classList.toggle('err',!!msg); el.querySelector('em').textContent=msg||''; if(msg&&ok){ f[name].focus(); ok=false; } };
   set('nom', f.nom.value.trim().length<3 ? 'Merci d\'indiquer votre nom et prénom.' : '');
-  set('tel', /^0[5-7]\d{8}$/.test(normTel(f.tel.value)) ? '' : 'Numéro marocain à 10 chiffres, ex : 06 12 34 56 78.');
-  set('ville', f.ville.value ? '' : 'Choisissez votre ville.');
+  set('tel', /^0[5-7]\d{8}$/.test(normTel(f.tel.value)) ? '' : 'Ce numéro ne semble pas complet. Indiquez 10 chiffres, par exemple 06 12 34 56 78.');
+  set('ville', f.ville.value ? '' : 'Choisissez votre ville pour que nous puissions vous livrer.');
   if(f.ville.value==='__autre') set('autreVille', f.autreVille.value.trim() ? '' : 'Indiquez le nom de votre ville.');
   set('adresse', f.adresse.value.trim().length<6 ? 'Indiquez votre adresse complète (quartier, rue, n°).' : '');
   return ok;
@@ -1902,7 +1902,7 @@ $('#modelsGrid').addEventListener('click',e=>{ const b=e.target.closest('[data-m
 $('#colorsGrid').addEventListener('click',e=>{ const b=e.target.closest('[data-c]'); if(!b) return; fit.ci=+b.dataset.c; fitDraw(!!fit.p.colors[fit.ci]?.img || fit.p.images.length>1); });
 $('#sizesGrid').addEventListener('click',e=>{ const b=e.target.closest('[data-s]'); if(!b||b.disabled) return; fit.size=b.dataset.s; fitDraw(false); });
 $('#mixAdd').addEventListener('click',()=>{
-  if(!fit.size){ const r=$('#sizesGrid'); r.classList.remove('shake'); void r.offsetWidth; r.classList.add('shake'); return toast('Veuillez choisir une taille'); }
+  if(!fit.size){ const r=$('#sizesGrid'); r.classList.remove('shake'); void r.offsetWidth; r.classList.add('shake'); return toast('Choisissez votre taille (étape 3) pour ajouter l\'article.'); }
   addToCart(fit.p.id, fit.size, fit.p.colors[fit.ci]?.name||'', 1); setTimeout(openCart,300);
 });
 { const av=fit.p.sizes.filter(z=>!fit.p.soldout.includes(z)); fit.size=av.length===1?av[0]:null; fitDraw(); }
