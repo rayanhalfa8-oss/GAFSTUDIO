@@ -363,8 +363,8 @@ img{display:block;max-width:100%}
 .faq{border-top:1px solid var(--line)}
 .faq-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
 .faq-head{position:sticky;top:calc(var(--hdr,0px) + 30px)}
-.faq-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.4vw,3rem);line-height:1.1;margin:10px 0 14px}
-.faq-head h3 em{font-style:italic}
+.faq-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.4vw,3rem);line-height:1.1;margin:10px 0 14px}
+.faq-head h2 em{font-style:italic}
 .faq-head p{color:#444;margin-bottom:24px;max-width:420px}
 .faq-wa{width:auto;padding:0 24px}
 .faq-list details{border-bottom:1px solid var(--line);padding:20px 0}
@@ -607,7 +607,7 @@ img{display:block;max-width:100%}
 section{padding:80px 0}
 .sec-head{text-align:center;margin-bottom:42px}
 .sec-head .caps{color:var(--grey);display:block;margin-bottom:10px}
-.sec-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.4vw,3rem);line-height:1.1}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.4vw,3rem);line-height:1.1}
 
 /* =========================================================
    4) الفئات
@@ -660,8 +660,8 @@ section{padding:80px 0}
 .edit-media{position:relative;overflow:hidden}
 .edit-text{background:var(--blush);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px}
 .edit-text .caps{margin-bottom:14px}
-.edit-text h3{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4.4vw,4.2rem);line-height:1.05;margin-bottom:18px}
-.edit-text h3 em{font-style:italic}
+.edit-text h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4.4vw,4.2rem);line-height:1.05;margin-bottom:18px}
+.edit-text h2 em{font-style:italic}
 .edit-text p{max-width:420px;color:#444;margin-bottom:30px}
 
 /* =========================================================
@@ -687,7 +687,7 @@ section{padding:80px 0}
    8) النشرة البريدية
    ========================================================= */
 .news{background:var(--pink);text-align:center}
-.news h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.6vw,3.2rem);margin-bottom:8px}
+.news h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.6vw,3.2rem);margin-bottom:8px}
 .news p{margin-bottom:28px;color:#3a3a3a}
 .news form{display:flex;max-width:520px;margin:0 auto;background:var(--white)}
 .news input{flex:1;min-width:0;border:none;padding:0 20px;height:54px;font:inherit;outline:none}
@@ -813,12 +813,12 @@ section{padding:80px 0}
    ========================================================= */
 :root{
   --ink:#1F1A17;          /* charbon chaud (textes, boutons) */
-  --grey:#7D736C;         /* texte secondaire */
+  --grey:#6B625B;         /* texte secondaire */
   --line:#E9E0D5;         /* filets */
   --soft:#F4EEE6;         /* fonds clairs */
   --pink:#E9D6C7;         /* nude champagne (boutons doux, badges) */
   --blush:#F8F2EB;        /* ivoire rosé */
-  --pink-hot:#9A7350;     /* bronze (accents, prix promo) */
+  --pink-hot:#86613F;     /* bronze (accents, prix promo) */
   --gold:#B8955A;         /* or doux (ornements) */
   --white:#FFFDFA;
   --sh-1:0 1px 2px rgba(60,40,25,.06),0 6px 14px rgba(60,40,25,.06);
@@ -845,7 +845,7 @@ body{background:#FBF8F4}
 .btn-line:hover{background:var(--ink);color:#FBF8F4;transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(31,26,23,.6)}
 
 /* ornement or sous les titres de section */
-.sec-head h3::after,.coll-head h2::after{content:"";display:block;width:46px;height:1px;margin:18px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.sec-head h2::after,.coll-head h2::after{content:"";display:block;width:46px;height:1px;margin:18px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .sec-head .caps{color:var(--pink-hot)}
 
 /* apparitions en perspective 3D */
@@ -919,7 +919,7 @@ body{background:#FBF8F4}
    ========================================================= */
 .skip{position:absolute;left:12px;top:-80px;z-index:400;background:var(--ink);color:#FBF8F4;padding:12px 18px;font-size:.8rem;letter-spacing:.08em;transition:top .2s}
 .skip:focus{top:12px}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 html{scrollbar-color:#CDB79B #F4EEE6}
 h1,h2,h3,h4,h5{text-wrap:balance}
 p{text-wrap:pretty}
@@ -942,7 +942,7 @@ p{text-wrap:pretty}
 .steps-list{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;counter-reset:step;max-width:1120px;margin:0 auto}
 .steps-list li{counter-increment:step;border-top:1px solid var(--ink);padding-top:24px;min-width:0}
 .steps-list li::before{content:counter(step);display:block;font-family:var(--serif);font-style:italic;font-size:3.6rem;line-height:1;color:var(--gold);margin-bottom:16px}
-.steps-list h4{font-family:var(--serif);font-weight:500;font-size:1.6rem;line-height:1.2;margin-bottom:10px}
+.steps-list h3{font-family:var(--serif);font-weight:500;font-size:1.6rem;line-height:1.2;margin-bottom:10px}
 .steps-list p{color:#4A423C;font-size:.92rem;max-width:36ch}
 .steps-list a{text-decoration:underline;text-underline-offset:3px}
 .steps-cta{display:flex;justify-content:center;margin-top:48px}
@@ -956,7 +956,7 @@ p{text-wrap:pretty}
 .is-cutout .fit-podium{bottom:96px}
 .is-cutout .avatar-display{padding-bottom:102px}
 .is-cutout .fit-photo{height:calc(100% - 170px)}
-.avatar-display:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:12px}
+.avatar-display:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;border-radius:12px}
 .fit-photo .fit-ghost{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;animation:fitGhost .36s cubic-bezier(.4,0,.2,1) forwards}
 .fit-photo img.fit-in{animation:fitIn .36s cubic-bezier(.4,0,.2,1)}
 @keyframes fitGhost{to{opacity:0}}
@@ -965,7 +965,7 @@ p{text-wrap:pretty}
 .fit-marker{position:absolute;left:50%;top:94%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(184,149,90,.22),0 2px 6px rgba(60,40,25,.35);transition:opacity .3s}
 .spin-dots.labels button.soon{opacity:.5;border-style:dashed;cursor:help}
 .spin-dots.labels button.soon:hover{border-color:#E2D6C6}
-.spin-dots.labels button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.spin-dots.labels button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 @media (max-width:900px){.m-hide{display:none}}
 @media (prefers-reduced-motion:reduce){.fit-photo .fit-ghost{display:none}.fit-photo img.fit-in{animation:none}}
 
@@ -977,8 +977,8 @@ p{text-wrap:pretty}
 .brand .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;max-width:1180px}
 .brand-media{aspect-ratio:4/5;overflow:hidden;border-radius:4px;box-shadow:var(--sh-3d);max-width:100%}
 .brand-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.brand-text h3{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.08;margin-bottom:18px}
-.brand-text h3 em{font-style:italic}
+.brand-text h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.08;margin-bottom:18px}
+.brand-text h2 em{font-style:italic}
 .brand-text p{color:#4A423C;max-width:52ch;margin-bottom:14px}
 .brand-facts{list-style:none;display:grid;gap:12px;margin:24px 0 28px}
 .brand-facts li{display:flex;gap:12px;align-items:baseline;font-size:.95rem}
@@ -1058,6 +1058,30 @@ p{text-wrap:pretty}
   .pdp-add{position:sticky;bottom:0;z-index:5;background:#fff;padding:12px 16px;margin:0 -16px;box-shadow:0 -8px 20px rgba(0,0,0,.06)}
   .pdp-reassure li{font-size:.68rem;padding:10px 4px}
   .pdp-add .btn,#pdpAsk{letter-spacing:.06em;font-size:.72rem;padding:0 12px}
+}
+
+/* =========================================================
+   ♿ v3 (ui-ux-pro-max) : zones tactiles, lisibilité, vidéos
+   ========================================================= */
+button:not(:disabled),a,select,label.pay-opt,.cat,[data-pdp]{cursor:pointer}
+button,a,select,input,textarea,label{touch-action:manipulation}
+.ico{width:44px;height:44px}
+.heart{width:44px;height:44px;top:8px;right:8px}
+.swatches{gap:12px}
+.swatches button{position:relative}
+.swatches button::after{content:"";position:absolute;inset:-9px}
+.colors button{width:36px;height:36px}
+.drawer .qty button{width:40px;height:40px}
+.item .rm{padding:10px 0}
+.toast:empty{visibility:hidden}
+.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:85% 18%}
+.pdp-main video{width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block}
+.pdp-thumbs button{position:relative}
+.vid-badge{position:absolute;right:6px;bottom:6px;width:24px;height:24px;border-radius:50%;background:rgba(31,26,23,.78);display:grid;place-items:center}
+.vid-badge svg{width:10px;height:10px;fill:#fff;margin-left:2px}
+@media (max-width:820px){
+  .pdp-info details p,.pdp-info details ul,.faq-list details p,.steps-list p,.brand-text p{font-size:1rem}
+  .card .sub,.sizes-mini,.sub-colors{font-size:.84rem}
 }
 </style>
 </head>
@@ -1163,7 +1187,7 @@ p{text-wrap:pretty}
   <div class="wrap">
     <div class="brand-media reveal"><img data-photo="pyjama-noeuds-rose" alt="Pyjama GAF STUDIO porté dans une chambre lumineuse" loading="lazy"></div>
     <div class="brand-text reveal">
-      <h3>Le confort,<br><em>avec élégance</em></h3>
+      <h2>Le confort,<br><em>avec élégance</em></h2>
       <p>GAF STUDIO, c'est une boutique marocaine de pyjamas, de peignoirs et de tenues de nuit pour femme. Des matières douces, des coupes confortables, et ce petit détail qui fait la différence : un volant, un nœud, une broderie.</p>
       <p>Chaque commande est préparée avec soin, emballée comme un cadeau et livrée partout au Maroc. Vous payez à la réception.</p>
       <ul class="brand-facts">
@@ -1178,7 +1202,7 @@ p{text-wrap:pretty}
 
 <section id="categories">
   <div class="wrap">
-    <div class="sec-head reveal"><h3>Pour des nuits parfaites</h3></div>
+    <div class="sec-head reveal"><h2>Pour des nuits parfaites</h2></div>
     <div class="cats">
       <!-- 🎬 Case animée : la photo vient de PHOTOS["categorie-pyjamas"] (ou mettez data-src="images/categorie-pyjamas.jpg") -->
       <a href="#produits" class="cat reveal" data-cat="pyjama"><div class="cat-media live"><img data-photo="categorie-pyjamas" alt="Pyjama rose imprimé cerises"><span class="cat-tag">Nouvelle collection</span></div><p>Pyjamas</p></a>
@@ -1197,7 +1221,7 @@ p{text-wrap:pretty}
      ========================================================= -->
 <section class="featured" id="best">
   <div class="wrap">
-    <div class="sec-head reveal"><h3 id="bestTitle">Les nouveautés</h3><p class="sec-sub" id="bestSub"></p></div>
+    <div class="sec-head reveal"><h2 id="bestTitle">Les nouveautés</h2><p class="sec-sub" id="bestSub"></p></div>
     <div class="grid" id="bestGrid"></div>
     <div class="steps-cta reveal"><a href="#produits" class="btn btn-line">Voir toute la collection</a></div>
   </div>
@@ -1245,7 +1269,7 @@ p{text-wrap:pretty}
      ========================================================= -->
 <section class="mix" id="mix">
   <div class="wrap">
-    <div class="sec-head reveal"><h3>Essayez avant de commander</h3><p class="sec-sub">Choisissez un modèle, une couleur et une taille : la Fit Room vous montre l'article en photo réelle, avec un zoom sur la matière.</p></div>
+    <div class="sec-head reveal"><h2>Essayez avant de commander</h2><p class="sec-sub">Choisissez un modèle, une couleur et une taille : la Fit Room vous montre l'article en photo réelle, avec un zoom sur la matière.</p></div>
     <div class="studio-container">
       <!-- Mannequin 3D Presentation Stage -->
       <div class="mannequin-stage reveal" id="mixStage">
@@ -1337,7 +1361,7 @@ p{text-wrap:pretty}
       <div class="oa-sparks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </div>
     <div class="edit-text reveal">
-      <h3>Le 2<sup style="font-size:.45em">e</sup> article,<br><em>livraison offerte</em></h3>
+      <h2>Le 2<sup style="font-size:.45em">e</sup> article,<br><em>livraison offerte</em></h2>
       <p>Commandez deux articles (pyjamas, peignoirs, ensembles…) et nous vous livrons gratuitement partout au Maroc. Paiement à la livraison.</p>
       <a href="#produits" class="btn btn-dark">J'en profite</a>
     </div>
@@ -1349,11 +1373,11 @@ p{text-wrap:pretty}
      ========================================================= -->
 <section class="steps" id="commander">
   <div class="wrap">
-    <div class="sec-head reveal"><h3>Commander en trois étapes</h3><p class="sec-sub">Aucun paiement en ligne, aucun compte à créer.</p></div>
+    <div class="sec-head reveal"><h2>Commander en trois étapes</h2><p class="sec-sub">Aucun paiement en ligne, aucun compte à créer.</p></div>
     <ol class="steps-list">
-      <li class="reveal"><h4>Choisissez</h4><p>Votre modèle, votre couleur et votre taille. Un doute ? Consultez le <a href="#" class="sg-link">guide des tailles</a> ou demandez conseil sur WhatsApp.</p></li>
-      <li class="reveal"><h4>Indiquez votre adresse</h4><p>Nom, téléphone, ville et adresse. Votre commande s'envoie sur WhatsApp, déjà rédigée : vous n'avez qu'à appuyer sur « Envoyer ».</p></li>
-      <li class="reveal"><h4>Payez à la réception</h4><p>En espèces, quand le colis arrive chez vous. Livraison offerte dès 2 articles, emballage cadeau offert sur chaque commande.</p></li>
+      <li class="reveal"><h3>Choisissez</h3><p>Votre modèle, votre couleur et votre taille. Un doute ? Consultez le <a href="#" class="sg-link">guide des tailles</a> ou demandez conseil sur WhatsApp.</p></li>
+      <li class="reveal"><h3>Indiquez votre adresse</h3><p>Nom, téléphone, ville et adresse. Votre commande s'envoie sur WhatsApp, déjà rédigée : vous n'avez qu'à appuyer sur « Envoyer ».</p></li>
+      <li class="reveal"><h3>Payez à la réception</h3><p>En espèces, quand le colis arrive chez vous. Livraison offerte dès 2 articles, emballage cadeau offert sur chaque commande.</p></li>
     </ol>
     <div class="steps-cta reveal"><a href="#produits" class="btn btn-dark">Choisir mon pyjama</a></div>
   </div>
@@ -1367,7 +1391,7 @@ p{text-wrap:pretty}
      ========================================================= -->
 <section class="reviews" id="avis" hidden>
   <div class="wrap">
-    <div class="sec-head reveal"><h3>Elles en parlent</h3><p class="sec-sub">Les avis de nos clientes, partagés avec leur accord.</p></div>
+    <div class="sec-head reveal"><h2>Elles en parlent</h2><p class="sec-sub">Les avis de nos clientes, partagés avec leur accord.</p></div>
     <div class="rev-grid" id="revGrid"></div>
   </div>
 </section>
@@ -1375,7 +1399,7 @@ p{text-wrap:pretty}
 <section class="faq" id="faq">
   <div class="wrap faq-grid">
     <div class="faq-head reveal">
-      <h3>Commandez <em>l'esprit tranquille</em></h3>
+      <h2>Commandez <em>l'esprit tranquille</em></h2>
       <p>Une hésitation sur la taille, la matière ou la livraison ? Voici nos réponses. Et si vous avez encore un doute, nous sommes là sur WhatsApp.</p>
       <button class="btn btn-wa faq-wa" data-wa="Bonjour GAF STUDIO 🌸 J'ai une question avant de commander :"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg><span>Poser ma question</span></button>
     </div>
@@ -1398,7 +1422,7 @@ p{text-wrap:pretty}
 
 <section class="news" id="news">
   <div class="wrap reveal">
-    <h3>Les nouveautés avant tout le monde</h3>
+    <h2>Les nouveautés avant tout le monde</h2>
     <p>Recevez nos nouvelles collections et nos offres directement sur WhatsApp.</p>
     <button class="btn btn-dark" data-wa="Bonjour GAF STUDIO, je souhaite recevoir vos nouveautés et vos offres sur WhatsApp.">Recevoir les nouveautés</button>
     <small>Un seul message à envoyer. Vous pouvez arrêter à tout moment.</small>
@@ -1596,7 +1620,7 @@ p{text-wrap:pretty}
     <button class="btn btn-dark" id="doneClose">Revenir à la boutique</button>
   </div>
 </div>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <button class="top-btn" id="topBtn" aria-label="Haut de page"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
 
 <!-- 📷 صورة الهيرو مدمجة داخل الملف حتى يشتغل وحده. لتغييرها: HERO_IMAGE = "images/campagne-1.jpg" -->
@@ -1623,6 +1647,7 @@ p{text-wrap:pretty}
                  {face:"…", droit:"…", dos:"…", gauche:"…"}
                  · gauche absent → le profil droit s'affiche en miroir
                  · angle sans photo → bouton grisé « bientôt disponible »
+   - colors[i].video : courte vidéo MP4 de cette couleur (ex. générée avec Higgsfield), affichée dans la galerie de la page produit
    - hook      : phrase d'accroche · points : points forts (liste) · tip : conseil de style · care : entretien
                  ✏️ vérifiez l'entretien (care) selon l'étiquette de chaque article
    ========================================================= */
@@ -2216,6 +2241,18 @@ $('#noticeClose').addEventListener('click',()=>{ $('#notice').classList.add('hid
    ========================================================= */
 const hero=$('#hero'), reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 $('#heroImg').src = HERO_IMAGE;
+/* ✏️ VIDÉO DU HERO (par ex. générée avec Higgsfield, voir docs/HIGGSFIELD.md) : "images/hero.mp4"
+   Vide = photo animée. La vidéo est muette, en boucle, et remplacée par la photo si elle ne se lance pas. */
+const HERO_VIDEO = "";
+if(HERO_VIDEO && !reduce){
+  const v=document.createElement('video');
+  v.muted=true; v.loop=true; v.autoplay=true; v.playsInline=true; v.preload='metadata';
+  v.setAttribute('playsinline',''); v.setAttribute('aria-hidden','true'); v.poster=HERO_IMAGE; v.src=HERO_VIDEO;
+  $('#heroImg').after(v);
+  v.addEventListener('playing',()=>{ $('#heroImg').style.visibility='hidden'; });
+  v.addEventListener('error',()=>{ v.remove(); $('#heroImg').style.visibility=''; });
+  v.play().catch(()=>{});
+}
 
 /* =========================================================
    😄 Hero vivant : les trois filles bougent et rient ensemble
@@ -2226,7 +2263,7 @@ $('#heroImg').src = HERO_IMAGE;
    ========================================================= */
 (function(){
   const cv=$('#heroLive'), still=$('#heroImg');
-  if(!cv || reduce || typeof HERO_LAYERS==='undefined') return;
+  if(!cv || reduce || HERO_VIDEO || typeof HERO_LAYERS==='undefined'){ if(cv && HERO_VIDEO) cv.remove(); return; }
   const gl=cv.getContext('webgl',{alpha:false,antialias:false}); if(!gl){ cv.remove(); return; }
   const VS='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   const FS=`precision highp float;
@@ -2442,6 +2479,7 @@ const baseTitle=document.title;
 function pdpImgs(p,ci){
   const c=p.colors[ci]||{}, v=c.views||{}, L=[];
   if(c.img) L.push({src:c.img,ci});
+  if(c.video) L.push({src:c.video,ci,video:true,poster:c.img});
   if(v.face) L.push({src:v.face,ci,cut:true});
   if(v.droit) L.push({src:v.droit,ci,cut:true}); if(v.dos) L.push({src:v.dos,ci,cut:true});
   p.colors.forEach((k,i)=>{ if(k.img && i!==ci) L.push({src:k.img,ci:i}); });
@@ -2460,8 +2498,8 @@ function stockText(p){
 function drawPDP(){
   const p=pdp.p, imgs=pdpImgs(p,pdp.ci), cur=imgs[Math.min(pdp.img,imgs.length-1)], c=p.colors[pdp.ci]?.name||'';
   $('#pdpMain').className='pdp-main'+(cur.cut?' cut':'');
-  $('#pdpMain').innerHTML = (p.old?`<span class="flag-new promo">-${Math.round((1-p.price/p.old)*100)} %</span>`:'') + pic(cur.src,`${p.name} · ${c}`);
-  $('#pdpThumbs').innerHTML = imgs.length>1 ? imgs.map((x,i)=>`<button class="${i===pdp.img?'on':''}${x.cut?' cut':''}" data-i="${i}" aria-label="Photo ${i+1}">${pic(x.src,'')}</button>`).join('') : '';
+  $('#pdpMain').innerHTML = (p.old?`<span class="flag-new promo">-${Math.round((1-p.price/p.old)*100)} %</span>`:'') + (cur.video?`<video src="${cur.src}" ${cur.poster?`poster="${cur.poster}"`:''} autoplay muted loop playsinline aria-label="Vidéo : ${esc(p.name)}, ${esc(c)}"></video>`:pic(cur.src,`${p.name} · ${c}`));
+  $('#pdpThumbs').innerHTML = imgs.length>1 ? imgs.map((x,i)=>`<button class="${i===pdp.img?'on':''}${x.cut?' cut':''}" data-i="${i}" aria-label="Photo ${i+1}">${x.video?`${pic(x.poster||'','')}<span class="vid-badge" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg></span>`:pic(x.src,'')}</button>`).join('') : '';
   $('#pdpTag').textContent = p.tags.includes('best')?'Best-seller':p.tags.includes('new')?'Nouveauté':'';
   $('#pdpName').textContent=p.name; $('#pdpPrice').innerHTML=priceHTML(p)+(p.old?`<span class="save" style="margin-left:6px">Vous économisez ${money(p.old-p.price)}</span>`:'');
   $('#pdpHook').textContent=p.hook||'';
@@ -2537,6 +2575,27 @@ $('#payList').innerHTML=PAYMENT_METHODS.map((m,i)=>`<label class="pay-opt"><inpu
 const payLabel=()=>{ const v=document.querySelector('#payList input:checked')?.value; return (PAYMENT_METHODS.find(m=>m.id===v)||PAYMENT_METHODS[0]).label; };
 
 route();
+
+/* ---------- ♿ fenêtres : focus au bon endroit, gardé à l'intérieur, rendu à la fermeture ---------- */
+(function(){
+  const FOCUSABLE='a[href],button:not([disabled]),input:not([type=hidden]),select,textarea,[tabindex]:not([tabindex="-1"])';
+  const layers=[ {el:$('#co'),open:e=>!e.hidden,first:'input[name=nom]'}, {el:$('#sg'),open:e=>e.classList.contains('open'),first:'.qv-close'},
+                 {el:$('#qv'),open:e=>e.classList.contains('open'),first:'.qv-close'}, {el:$('#drawer'),open:e=>e.classList.contains('open'),first:'#closeCart'},
+                 {el:$('#pdp'),open:e=>!e.hidden,first:'#pdpBack'} ];
+  const top=()=>layers.find(l=>l.el&&l.open(l.el));
+  const visible=d=>[...d.querySelectorAll(FOCUSABLE)].filter(x=>x.offsetParent!==null||x===document.activeElement);
+  let back=[];
+  layers.forEach(l=>{ if(!l.el) return; let was=l.open(l.el);
+    new MutationObserver(()=>{ const now=l.open(l.el); if(now===was) return; was=now;
+      if(now){ back.push(document.activeElement); setTimeout(()=>{ const t=l.el.querySelector(l.first)||visible(l.el)[0]; t&&t.focus({preventScroll:true}); },60); }
+      else { const b=back.pop(); if(b&&document.contains(b)&&!top()) b.focus({preventScroll:true}); }
+    }).observe(l.el,{attributes:true,attributeFilter:['class','hidden']}); });
+  document.addEventListener('keydown',e=>{ if(e.key!=='Tab') return; const l=top(); if(!l) return;
+    const f=visible(l.el); if(!f.length) return; const first=f[0], last=f[f.length-1], a=document.activeElement;
+    if(!l.el.contains(a)){ e.preventDefault(); first.focus(); }
+    else if(e.shiftKey && a===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && a===last){ e.preventDefault(); first.focus(); } });
+})();
 
 buildFilters(); render(); updateCart(); updateWish(); watch();
 </script>

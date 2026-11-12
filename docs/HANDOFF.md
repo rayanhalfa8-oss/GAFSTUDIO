@@ -35,13 +35,13 @@ Il n'y a ni paiement en ligne ni compte client : la cliente paie à la livraison
 | Token | Valeur | Usage |
 |---|---|---|
 | `--ink` | `#1F1A17` | Texte principal, boutons foncés, chiffres du panier |
-| `--grey` | `#7D736C` | Texte secondaire, sous-titres, légendes |
+| `--grey` | `#6B625B` (contraste ≥ 5,2:1) | Texte secondaire, sous-titres, légendes |
 | `--line` | `#E9E0D5` | Séparateurs, bordures de cartes et de champs |
 | `--soft` | `#F4EEE6` | Fond des images en chargement, champs de recherche |
 | `--pink` | `#E9D6C7` | Boutons doux (`.btn-pink`), sélection de texte |
 | `--blush` | `#F8F2EB` | Fonds de sections claires, blocs de réassurance |
-| `--pink-hot` | `#9A7350` | Accent bronze : prix promo, « Nouveauté », icônes de réassurance |
-| `--gold` | `#B8955A` | Ornements, anneau de focus, repère du podium Fit Room |
+| `--pink-hot` | `#86613F` (contraste ≥ 4,8:1) | Accent bronze : prix promo, « Nouveauté », icônes de réassurance |
+| `--gold` | `#B8955A` | Ornements, repère du podium Fit Room (jamais pour du texte : contraste 2,7:1) |
 | `--white` | `#FFFDFA` | Fond des fenêtres et de la page produit |
 | fond de page | `#FBF8F4` | `body` |
 | WhatsApp | `#25D366` | Bouton flottant et bouton d'envoi de commande uniquement |
@@ -112,6 +112,8 @@ Les ombres sont teintées en brun chaud (`rgba(60,40,25,…)`), jamais en noir p
 | `RETURNS_POLICY` | Politique d'échange ; vide = invitation WhatsApp | `""` |
 | `STOCK` | Quantités par produit › couleur › taille | `{}` |
 | `PAYMENT_METHODS` | Modes de paiement proposés | paiement à la livraison |
+| `HERO_VIDEO` | Vidéo du hero (ex. Higgsfield) ; vide = photo animée | `""` |
+| `colors[i].video` | Vidéo d'une couleur dans la galerie produit | — |
 | `SOCIAL` | Liens Instagram / Facebook / TikTok ; vide = icône masquée | vides |
 
 ---
@@ -122,7 +124,7 @@ Les ombres sont teintées en brun chaud (`rgba(60,40,25,…)`), jamais en noir p
 |---|---|---|
 | `btn-dark` | Survol | Dégradé plus clair, `translateY(-2px)`, ombre plus large |
 | Tous les `.btn` | Appui | `translateY(1px) scale(.99)` |
-| Tous les éléments interactifs | Focus clavier | `outline: 2px solid var(--gold)`, `offset: 3px` |
+| Tous les éléments interactifs | Focus clavier | `outline: 2px solid var(--ink)`, `offset: 3px` |
 | Carte produit | Survol (souris uniquement) | Inclinaison 3D (±6°) + reflet qui suit le curseur ; bouton rapide qui monte |
 | Carte produit | Tactile | Pas d'inclinaison ; bouton rapide toujours visible |
 | Taille | Épuisée | `disabled`, texte barré, `title="Épuisé"` |
@@ -204,5 +206,8 @@ Les animations n'utilisent que `transform`, `opacity` et `filter`. Elles se coup
 - **Boutons à icône** : tous ont un `aria-label` (panier, favoris, fermer, zoom, couleurs).
 - **Images** : `alt` descriptif pour les photos produits et le hero ; `alt=""` pour les doublons décoratifs (miniatures, colonnes du bandeau promo).
 - **Formulaire** : chaque champ a un libellé visible ; les erreurs sont écrites en texte sous le champ, pas seulement en couleur ; focus automatique sur le premier champ en erreur.
-- **Contraste** : texte principal `#1F1A17` sur `#FBF8F4`. Vérifier au cas par cas le bronze `#9A7350` sur les fonds clairs (prix promo, petits libellés en majuscules).
-- **À améliorer** : annoncer les toasts aux lecteurs d'écran (`aria-live="polite"` sur `#toast`) et piéger le focus dans les fenêtres ouvertes.
+- **Contraste** : tous les textes ≥ 4,5:1 (encre 16:1, gris 5,2:1, bronze 4,8:1 sur les fonds clairs).
+- **Annonces** : `#toast` a `role="status"` et `aria-live="polite"`.
+- **Fenêtres** : le focus va au premier élément utile à l'ouverture, reste dans la fenêtre avec Tab / Maj+Tab, puis revient au bouton d'origine à la fermeture.
+- **Titres** : un seul `h1` (hero), `h2` par section, `h3` à l'intérieur.
+- **Zones tactiles** : 44 × 44 px minimum (icônes, cœur, pastilles agrandies par une zone invisible).
