@@ -968,6 +968,97 @@ p{text-wrap:pretty}
 .spin-dots.labels button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 @media (max-width:900px){.m-hide{display:none}}
 @media (prefers-reduced-motion:reduce){.fit-photo .fit-ghost{display:none}.fit-photo img.fit-in{animation:none}}
+
+/* =========================================================
+   🛍️ v2 : page produit, marque, nouveautés, avis, paiement
+   ========================================================= */
+/* la marque */
+.brand{background:linear-gradient(180deg,#FBF8F4,#F6EFE7)}
+.brand .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;max-width:1180px}
+.brand-media{aspect-ratio:4/5;overflow:hidden;border-radius:4px;box-shadow:var(--sh-3d);max-width:100%}
+.brand-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.brand-text h3{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.08;margin-bottom:18px}
+.brand-text h3 em{font-style:italic}
+.brand-text p{color:#4A423C;max-width:52ch;margin-bottom:14px}
+.brand-facts{list-style:none;display:grid;gap:12px;margin:24px 0 28px}
+.brand-facts li{display:flex;gap:12px;align-items:baseline;font-size:.95rem}
+.brand-facts li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;transform:translateY(-2px)}
+/* nouveautés / best-sellers */
+.featured .grid{margin-bottom:10px}
+.card .sub-colors{font-size:.78rem;color:var(--grey);margin-bottom:6px}
+/* avis */
+.reviews{background:linear-gradient(180deg,#F7F1EA,#FBF8F4)}
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.rev{background:#fff;border:1px solid var(--line);padding:24px;border-radius:4px;display:flex;flex-direction:column;gap:12px}
+.rev .stars{color:var(--gold);letter-spacing:.12em}
+.rev p{color:#3F3833;font-size:.94rem}
+.rev small{color:var(--grey);font-size:.78rem}
+/* page produit */
+.pdp{position:fixed;inset:0;z-index:190;background:var(--white);overflow-y:auto;animation:coIn .35s cubic-bezier(.2,.7,.2,1)}
+.pdp[hidden]{display:none!important}
+.pdp-top{position:sticky;top:0;z-index:5;background:rgba(255,253,250,.94);backdrop-filter:blur(10px);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;padding:0 24px;border-bottom:1px solid var(--line)}
+.pdp-top .ico{justify-self:end}
+.pdp-crumbs{width:min(1200px,100% - 32px);margin:18px auto 0}
+.pdp-body{width:min(1200px,100% - 32px);margin:16px auto 56px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.pdp-gal{position:sticky;top:84px;min-width:0}
+.pdp-main{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--soft);border-radius:4px;max-width:100%}
+.pdp-main img{width:100%;height:100%;object-fit:cover;object-position:center 25%;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .3s}
+.pdp-main.cut{background:radial-gradient(ellipse at 50% 28%,#FFFFFF 0,#F7F1E9 55%,#EADFD1 100%)}
+.pdp-main.cut img{object-fit:contain;object-position:center bottom;padding-top:4%;filter:drop-shadow(0 18px 22px rgba(60,40,25,.2))}
+@media (hover:hover) and (pointer:fine){.pdp-main{cursor:zoom-in}.pdp-main:hover img{transform:scale(1.8)}}
+.pdp-main .flag-new{top:14px;left:14px}
+.pdp-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding:4px 2px;scrollbar-width:thin}
+.pdp-thumbs button{flex:0 0 70px;aspect-ratio:3/4;border-radius:3px;overflow:hidden;outline:1.5px solid transparent;outline-offset:2px;background:var(--soft)}
+.pdp-thumbs button.on{outline-color:var(--ink)}
+.pdp-thumbs button.cut{background:radial-gradient(ellipse at 50% 30%,#fff,#EFE5D8)}
+.pdp-thumbs img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.pdp-thumbs button.cut img{object-fit:contain;object-position:center bottom}
+.pdp-360{width:100%;margin-top:12px}
+.pdp-info{display:flex;flex-direction:column;gap:18px;min-width:0}
+.pdp-info h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.4vw,2.9rem);line-height:1.08}
+.pdp-tag{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-hot);font-weight:600}
+.pdp-tag:empty{display:none}
+.pdp-info .prices{font-size:1.25rem}
+.pdp-hook{font-family:var(--serif);font-style:italic;font-size:1.22rem;line-height:1.45;color:#4A423C}
+.pdp-stock{font-size:.84rem;margin-top:10px;display:flex;align-items:center;gap:8px;color:#3F3833}
+.pdp-stock::before{content:"";width:8px;height:8px;border-radius:50%;background:#3E8E5A;flex-shrink:0}
+.pdp-stock.low::before{background:#C48A1C}.pdp-stock.out::before{background:#A8423A}
+.pdp-add .btn{font-size:.82rem}
+.pdp-reassure{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pdp-reassure li{font-size:.74rem;text-align:center;background:var(--blush);padding:12px 6px;border-radius:3px;line-height:1.35}
+.pdp-info details{border-top:1px solid var(--line);padding:14px 0}
+.pdp-info details:last-of-type{border-bottom:1px solid var(--line)}
+.pdp-info summary{cursor:pointer;list-style:none;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;display:flex;justify-content:space-between}
+.pdp-info summary::-webkit-details-marker{display:none}
+.pdp-info summary::after{content:"+";font-size:1rem;font-weight:400;letter-spacing:0}
+.pdp-info details[open] summary::after{content:"−"}
+.pdp-info details p,.pdp-info details ul{margin-top:10px;font-size:.9rem;color:#444}
+.pdp-info .points{list-style:none;display:grid;gap:7px}
+.pdp-info .points li{position:relative;padding-left:22px}
+.pdp-info .points li::before{content:"";position:absolute;left:2px;top:.55em;width:10px;height:6px;border-left:1.6px solid var(--pink-hot);border-bottom:1.6px solid var(--pink-hot);transform:rotate(-45deg)}
+.pdp-more{width:min(1200px,100% - 32px);margin:0 auto 80px}
+.pdp-more h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:28px;text-align:center}
+/* panier : changer la taille */
+.item-size select{border:1px solid var(--line);background:#fff;font:inherit;font-size:.8rem;padding:2px 6px;margin-left:4px;color:var(--ink);border-radius:2px}
+/* paiement */
+.f-pay{border:none;margin:4px 0 18px;padding:0}
+.f-pay legend{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:9px}
+.pay-opt{display:flex;gap:12px;align-items:flex-start;border:1px solid #D6D6D6;background:#fff;padding:14px;cursor:pointer;margin-bottom:8px;transition:border-color .2s,box-shadow .2s}
+.pay-opt input{width:18px;height:18px;margin-top:2px;accent-color:var(--ink)}
+.pay-opt b{display:block;font-weight:500}
+.pay-opt small{color:var(--grey);font-size:.8rem}
+.pay-opt:has(input:checked){border-color:var(--ink);box-shadow:0 0 0 3px rgba(233,214,199,.6)}
+@media (max-width:900px){
+  .brand .wrap{grid-template-columns:1fr;gap:30px}
+  .brand-media{aspect-ratio:4/3}
+  .pdp-top{padding:0 14px;height:58px}
+  .pdp-body{grid-template-columns:1fr;gap:26px;margin-top:10px}
+  .pdp-gal{position:static}
+  .pdp-thumbs button{flex-basis:60px}
+  .pdp-add{position:sticky;bottom:0;z-index:5;background:#fff;padding:12px 16px;margin:0 -16px;box-shadow:0 -8px 20px rgba(0,0,0,.06)}
+  .pdp-reassure li{font-size:.68rem;padding:10px 4px}
+  .pdp-add .btn,#pdpAsk{letter-spacing:.06em;font-size:.72rem;padding:0 12px}
+}
 </style>
 </head>
 <body>
@@ -1027,6 +1118,7 @@ p{text-wrap:pretty}
       <li><a href="#produits" data-coll="pyjamas">Pyjamas</a></li>
       <li><a href="#produits" data-coll="peignoirs">Peignoirs</a></li>
       <li><a href="#produits" data-cat="mariee">Ensemble mariée</a></li>
+      <li><a href="#marque">La marque</a></li>
       <li><a href="#mix">Fit Room</a></li>
       <li><a href="#commander">Comment commander</a></li>
       <li><a href="#faq">Questions</a></li>
@@ -1067,6 +1159,23 @@ p{text-wrap:pretty}
   <div class="trust-track"><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.5"/><path d="M6.5 9.5v5M17.5 9.5v5"/></svg>Paiement à la livraison</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h12v9H2zM14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>Livraison offerte dès 2 articles</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>Partout au Maroc en 24 à 72 h</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s6 1 6 1 6 2 6-1-4-3-6 1"/></svg>Emballage cadeau offert</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg>Conseil taille sur WhatsApp</li></ul><ul aria-hidden="true"><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.5"/><path d="M6.5 9.5v5M17.5 9.5v5"/></svg>Paiement à la livraison</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h12v9H2zM14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>Livraison offerte dès 2 articles</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>Partout au Maroc en 24 à 72 h</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s6 1 6 1 6 2 6-1-4-3-6 1"/></svg>Emballage cadeau offert</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg>Conseil taille sur WhatsApp</li></ul></div>
 </div>
 
+<section class="brand" id="marque">
+  <div class="wrap">
+    <div class="brand-media reveal"><img data-photo="pyjama-noeuds-rose" alt="Pyjama GAF STUDIO porté dans une chambre lumineuse" loading="lazy"></div>
+    <div class="brand-text reveal">
+      <h3>Le confort,<br><em>avec élégance</em></h3>
+      <p>GAF STUDIO, c'est une boutique marocaine de pyjamas, de peignoirs et de tenues de nuit pour femme. Des matières douces, des coupes confortables, et ce petit détail qui fait la différence : un volant, un nœud, une broderie.</p>
+      <p>Chaque commande est préparée avec soin, emballée comme un cadeau et livrée partout au Maroc. Vous payez à la réception.</p>
+      <ul class="brand-facts">
+        <li>Des matières douces, pensées pour dormir et se détendre</li>
+        <li>Des tailles du M au XXL, avec un guide pour bien choisir</li>
+        <li>Un vrai conseil sur WhatsApp, avant et après la commande</li>
+      </ul>
+      <a href="#best" class="btn btn-dark">Découvrir les modèles</a>
+    </div>
+  </div>
+</section>
+
 <section id="categories">
   <div class="wrap">
     <div class="sec-head reveal"><h3>Pour des nuits parfaites</h3></div>
@@ -1086,6 +1195,14 @@ p{text-wrap:pretty}
 <!-- =========================================================
      5) COLLECTION PYJAMAS — المنتجات تُولَّد من مصفوفة PRODUCTS في JavaScript
      ========================================================= -->
+<section class="featured" id="best">
+  <div class="wrap">
+    <div class="sec-head reveal"><h3 id="bestTitle">Les nouveautés</h3><p class="sec-sub" id="bestSub"></p></div>
+    <div class="grid" id="bestGrid"></div>
+    <div class="steps-cta reveal"><a href="#produits" class="btn btn-line">Voir toute la collection</a></div>
+  </div>
+</section>
+
 <section id="produits" class="collection">
   <div class="wrap">
     <nav class="crumbs" aria-label="Fil d'Ariane"><a href="#">Accueil</a><span>/</span><span id="collCrumb">Pyjamas</span></nav>
@@ -1248,6 +1365,13 @@ p{text-wrap:pretty}
 <!-- =========================================================
      ❓ FAQ — répond aux hésitations avant l'achat (✏️ textes modifiables)
      ========================================================= -->
+<section class="reviews" id="avis" hidden>
+  <div class="wrap">
+    <div class="sec-head reveal"><h3>Elles en parlent</h3><p class="sec-sub">Les avis de nos clientes, partagés avec leur accord.</p></div>
+    <div class="rev-grid" id="revGrid"></div>
+  </div>
+</section>
+
 <section class="faq" id="faq">
   <div class="wrap faq-grid">
     <div class="faq-head reveal">
@@ -1330,6 +1454,44 @@ p{text-wrap:pretty}
 <!-- =========================================================
      👁️ Fiche rapide d'un produit (s'ouvre au clic sur la photo)
      ========================================================= -->
+<!-- =========================================================
+     🛍️ PAGE PRODUIT (lien partageable : #produit-nom-du-produit)
+     ========================================================= -->
+<div class="pdp" id="pdp" role="dialog" aria-modal="true" aria-labelledby="pdpName" hidden>
+  <header class="pdp-top">
+    <button class="co-back" id="pdpBack" aria-label="Retour à la collection"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Collection</span></button>
+    <span class="co-logo">GAF STUDIO</span>
+    <button class="ico" id="pdpCart" aria-label="Voir le panier"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" id="pdpCount" hidden>0</span></button>
+  </header>
+  <nav class="crumbs pdp-crumbs" aria-label="Fil d'Ariane"><a href="#produits">Accueil</a><span>/</span><span id="pdpColl"></span><span>/</span><span id="pdpCrumb"></span></nav>
+  <div class="pdp-body">
+    <div class="pdp-gal">
+      <div class="pdp-main" id="pdpMain"></div>
+      <div class="pdp-thumbs" id="pdpThumbs"></div>
+      <button class="btn btn-line pdp-360" id="pdp360">Voir sous tous les angles · Fit Room</button>
+    </div>
+    <div class="pdp-info">
+      <span class="pdp-tag" id="pdpTag"></span>
+      <h1 id="pdpName"></h1>
+      <div class="prices" id="pdpPrice"></div>
+      <p class="pdp-hook" id="pdpHook"></p>
+      <div><div class="opt-label">Couleur <em id="pdpColorName"></em></div><div class="colors" id="pdpColors"></div></div>
+      <div><div class="opt-label">Taille <a href="#" class="sg-link">Guide des tailles</a></div><div class="size-row" id="pdpSizes"></div><p class="pdp-stock" id="pdpStock"></p></div>
+      <div class="qv-add pdp-add">
+        <div class="qty"><button id="pdpMinus" aria-label="Moins">−</button><span id="pdpQty">1</span><button id="pdpPlus" aria-label="Plus">+</button></div>
+        <button class="btn btn-dark" id="pdpAdd">Ajouter au panier</button>
+      </div>
+      <button class="btn btn-wa" id="pdpAsk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg><span>Une question sur ce modèle ? WhatsApp</span></button>
+      <ul class="pdp-reassure"><li>Paiement<br>à la livraison</li><li>Livraison offerte<br>dès 2 articles</li><li>Partout au Maroc<br>en 24 à 72 h</li></ul>
+      <details open><summary>Description</summary><div id="pdpDesc"></div></details>
+      <details><summary>Composition et entretien</summary><p id="pdpComp"></p></details>
+      <details><summary>Livraison et paiement</summary><p id="pdpShip"></p></details>
+      <details><summary>Échanges et retours</summary><p id="pdpReturns"></p></details>
+    </div>
+  </div>
+  <section class="pdp-more"><h3>Vous aimerez aussi</h3><div class="grid" id="pdpMore"></div></section>
+</div>
+
 <div class="qv" id="qv" role="dialog" aria-modal="true" aria-labelledby="qvName">
   <div class="qv-bg" data-close></div>
   <div class="qv-box">
@@ -1407,10 +1569,11 @@ p{text-wrap:pretty}
       <div class="f-row">
         <label class="f"><span>Remarque <small>(facultatif)</small></span><textarea name="note" rows="2" placeholder="Message cadeau, horaire préféré, repère…"></textarea></label>
       </div>
+      <fieldset class="f-pay"><legend>Mode de paiement</legend><div id="payList"></div></fieldset>
       <label class="f-check"><input type="checkbox" name="cadeau"><span>C'est un cadeau (emballage cadeau offert)</span></label>
 
       <button class="btn btn-wa-solid" type="submit" id="coSend"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg><span>Envoyer ma commande sur WhatsApp</span></button>
-      <p class="co-trust">✓ Aucun paiement en ligne · ✓ Vous payez en espèces à la réception · ✓ Confirmation par WhatsApp</p>
+      <p class="co-trust">✓ Aucun paiement en ligne sur le site · ✓ Confirmation par WhatsApp · ✓ Livraison partout au Maroc</p>
     </form>
 
     <aside class="co-sum">
@@ -1419,7 +1582,7 @@ p{text-wrap:pretty}
       <div class="co-lines">
         <div><span>Sous-total</span><span id="coSub"></span></div>
         <div><span>Livraison</span><span id="coShip"></span></div>
-        <div class="tot"><span>Total à payer à la livraison</span><span id="coTot"></span></div>
+        <div class="tot"><span>Total</span><span id="coTot"></span></div>
       </div>
       <p class="co-hint" id="coHint"></p>
     </aside>
@@ -1588,6 +1751,18 @@ const WHATSAPP = "212698874940";            // ✏️ VOTRE numéro WhatsApp au 
 /* ✏️ vos réseaux : collez l'adresse complète (ex : "https://instagram.com/gafstudio") · vide = icône masquée */
 const SOCIAL = {instagram:"", facebook:"", tiktok:""};
 
+/* ✏️ AVIS CLIENTES : uniquement de vrais avis, avec l'accord de la cliente. Vide = section masquée.
+   ex : {nom:"Salma", ville:"Casablanca", note:5, texte:"Très doux, taille parfaite.", produit:"Pyjama à nœuds"} */
+const REVIEWS = [];
+/* ✏️ ÉCHANGES ET RETOURS : votre vraie politique (délai, conditions). Vide = invitation à demander sur WhatsApp. */
+const RETURNS_POLICY = "";
+/* ✏️ STOCK par produit (id) › couleur › taille, ex : {5:{"Lilas":{M:3, L:0}}}
+   0 = épuisé · 1 à 3 = « Plus que N » · absent = « Disponible » */
+const STOCK = {};
+/* ✏️ MODES DE PAIEMENT proposés à la commande (le premier est sélectionné par défaut)
+   ex. à ajouter : {id:"virement", label:"Virement bancaire", desc:"Le RIB vous est envoyé sur WhatsApp après confirmation"} */
+const PAYMENT_METHODS = [{id:"cod", label:"Paiement à la livraison", desc:"En espèces, à la réception du colis"}];
+
 const $ = (s,el=document)=>el.querySelector(s);
 const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
 const money = n => `${n.toLocaleString('fr-FR')} ${CUR}`;
@@ -1663,7 +1838,7 @@ $('#grid').addEventListener('click',e=>{
     if(im && colorImg(p,ci)) im.src=colorImg(p,ci);
     $$('button',sw.parentElement).forEach(x=>x.style.outlineColor='transparent'); sw.style.outlineColor='#1A1A1A';
     card.querySelector('.card-media').dataset.ci=ci; return; }
-  const o=e.target.closest('[data-open]'); if(o) openQV(+o.dataset.open, +(o.closest('.card')?.querySelector('.card-media')?.dataset.ci||0));
+  const o=e.target.closest('[data-open]'); if(o) openPDP(+o.dataset.open, +(o.closest('.card')?.querySelector('.card-media')?.dataset.ci||0));
 });
 function updateWish(){ const b=$('#wishCount'); b.textContent=wishes.length; b.hidden=!wishes.length; }
 
@@ -1748,7 +1923,7 @@ function updateCart(bump){
     : cart.map(i=>{const p=getP(i.id); return `
       <div class="item">
         <div class="item-media">${(()=>{const src=(p.colors.find(c=>c.name===i.color)||{}).img||p.images[0]; return src?`<img src="${src}" alt="">`:`<div class="ph ph-soft">${IMG}</div>`})()}</div>
-        <div><h6>${esc(p.name)}</h6><div class="sub">Taille <b>${i.size}</b>${i.color?` · ${esc(i.color)}`:''}</div>
+        <div><h6>${esc(p.name)}</h6><div class="sub"><label class="item-size">Taille <select data-size-k="${i.key}" aria-label="Changer la taille">${p.sizes.map(z=>`<option value="${z}" ${z===i.size?'selected':''} ${z!==i.size&&isOut(p,i.color,z)?'disabled':''}>${z}</option>`).join('')}</select></label>${i.color?` · ${esc(i.color)}`:''}</div>
           <div class="qty"><button data-q="-1" data-k="${i.key}" aria-label="Moins">−</button><span>${i.qty}</span><button data-q="1" data-k="${i.key}" aria-label="Plus">+</button></div></div>
         <div class="right"><span>${money(p.price*i.qty)}</span><button class="rm" data-rm="${i.key}">Retirer</button></div>
       </div>`}).join('');
@@ -1824,11 +1999,11 @@ $('#coForm').addEventListener('submit',e=>{
     `*Articles :*`, ...lines, ``,
     `Sous-total : ${money(t.sum)}`,
     `Livraison : ${t.free?'offerte':(t.ship!=null?money(t.ship):'à confirmer')}`,
-    `*Total à payer à la livraison : ${money(t.total)}${!t.free&&t.ship==null?' + livraison':''}*`, ``,
+    `*Total : ${money(t.total)}${!t.free&&t.ship==null?' + livraison':''}*`, ``,
     `*Client :*`, `👤 ${client.nom}`, `📞 ${client.tel}`, `📍 ${ville}`, `🏠 ${client.adresse}`,
     f.cadeau.checked ? `🎁 C'est un cadeau (emballage cadeau)` : '',
     f.note.value.trim() ? `📝 Remarque : ${f.note.value.trim()}` : '',
-    ``, `Paiement à la livraison ✅`
+    ``, `💳 Paiement : ${payLabel()}`
   ].filter((l,k,a)=>l!=='' || (a[k-1]!=='' )).join('\n');
   if(!WHATSAPP){ console.log(msg); return toast('Numéro WhatsApp à configurer (WHATSAPP dans le code)'); }
   lastWaUrl=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
@@ -1864,7 +2039,7 @@ function renderUpsell(){
   box.innerHTML=`<h6>${need?'Ajoutez un 2<sup>e</sup> article : <b>livraison offerte</b>':'Vous aimerez aussi'}</h6>
     <div class="up-list">${sugg.map(p=>`<button class="up-item" data-up="${p.id}"><img src="${colorImg(p,0)}" alt=""><div><span>${esc(p.name)}</span><em>${money(p.price)}</em><i>Voir</i></div></button>`).join('')}</div>`;
 }
-$('#upsell').addEventListener('click',e=>{ const b=e.target.closest('[data-up]'); if(b){ closeCart(); setTimeout(()=>openQV(+b.dataset.up),200); } });
+$('#upsell').addEventListener('click',e=>{ const b=e.target.closest('[data-up]'); if(b){ closeCart(); setTimeout(()=>openPDP(+b.dataset.up),200); } });
 
 /* ---------- ✨ inclinaison 3D + reflet au survol (souris uniquement) ---------- */
 if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -2226,6 +2401,143 @@ let tt; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add
 
 $('#year').textContent=new Date().getFullYear();
 const setHdr=()=>document.documentElement.style.setProperty('--hdr',$('#header').offsetHeight+'px'); setHdr(); addEventListener('resize',setHdr);
+
+/* =========================================================
+   🛍️ v2 : page produit, nouveautés, avis, stock, taille dans le panier, paiement
+   ========================================================= */
+const stockOf = (p,color,size) => { const s=STOCK[p.id]?.[color]; return s && size in s ? s[size] : undefined; };
+const isOut = (p,color,size) => p.soldout.includes(size) || stockOf(p,color,size)===0;
+const slug = p => 'produit-' + p.name.toLowerCase().replace(/œ/g,'oe').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const miniCard = p => `
+    <article class="card reveal">
+      <div class="card-media" data-pdp="${p.id}">
+        ${p.old ? `<span class="flag-new promo">-${Math.round((1-p.price/p.old)*100)} %</span>` : p.tags.includes('best') ? '<span class="flag-new">Best-seller</span>' : p.tags.includes('new') ? '<span class="flag-new">Nouveau</span>' : ''}
+        ${pic(colorImg(p,0),p.name)}
+        <button class="quick" data-pdp="${p.id}">Voir le modèle</button>
+      </div>
+      <h4 data-pdp="${p.id}">${esc(p.name)}</h4>
+      <div class="sub-colors">${p.colors.length>1?`${p.colors.length} couleurs · `:''}${esc(p.matiere)}</div>
+      <div class="prices">${priceHTML(p)}</div>
+    </article>`;
+document.addEventListener('click',e=>{ const t=e.target.closest('[data-pdp]'); if(t){ e.preventDefault(); openPDP(+t.dataset.pdp); } });
+
+/* nouveautés ou best-sellers (tags:["best"] dans PRODUCTS) */
+(function(){
+  const list=fitList(), best=list.filter(p=>p.tags.includes('best'));
+  const pick=(best.length?best:[...list].sort((a,b)=>b.id-a.id)).slice(0,4);
+  $('#bestTitle').textContent = best.length ? 'Les best-sellers' : 'Les nouveautés';
+  $('#bestSub').textContent = (best.length ? 'Les modèles préférés de nos clientes.' : 'Nos derniers modèles.') + ` À partir de ${money(Math.min(...pick.map(p=>p.price)))}.`;
+  $('#bestGrid').innerHTML = pick.map(miniCard).join('');
+})();
+
+/* avis : affichés seulement s'il y en a */
+if(REVIEWS.length){
+  $('#avis').hidden=false;
+  $('#revGrid').innerHTML = REVIEWS.map(r=>`<figure class="rev reveal"><span class="stars" aria-label="${r.note||5} sur 5">${'★'.repeat(r.note||5)}${'☆'.repeat(5-(r.note||5))}</span><p>« ${esc(r.texte)} »</p><small>${esc(r.nom)}${r.ville?', '+esc(r.ville):''}${r.produit?' · '+esc(r.produit):''}</small></figure>`).join('');
+}
+
+/* ---------- page produit ---------- */
+let pdp={p:null,ci:0,size:null,qty:1,img:0}, pdpCi=0;
+const baseTitle=document.title;
+function pdpImgs(p,ci){
+  const c=p.colors[ci]||{}, v=c.views||{}, L=[];
+  if(c.img) L.push({src:c.img,ci});
+  if(v.face) L.push({src:v.face,ci,cut:true});
+  if(v.droit) L.push({src:v.droit,ci,cut:true}); if(v.dos) L.push({src:v.dos,ci,cut:true});
+  p.colors.forEach((k,i)=>{ if(k.img && i!==ci) L.push({src:k.img,ci:i}); });
+  p.images.forEach(s=>{ if(s && !L.some(x=>x.src===s)) L.push({src:s,ci}); });
+  return L.length?L:[{src:'',ci}];
+}
+function stockText(p){
+  const c=p.colors[pdp.ci]?.name||'';
+  if(pdp.size){ const n=stockOf(p,c,pdp.size);
+    if(isOut(p,c,pdp.size)) return ['out',`Taille ${pdp.size} épuisée dans cette couleur. Choisissez une autre taille ou demandez-nous sur WhatsApp.`];
+    if(n!==undefined && n<=3) return ['low',`Plus que ${n} en stock en taille ${pdp.size}.`];
+    return ['',`Disponible en taille ${pdp.size} · livraison en 24 à 72 h selon votre ville.`]; }
+  const av=p.sizes.filter(z=>!isOut(p,c,z));
+  return av.length ? ['',`Disponible en ${av.join(', ')}.`] : ['out','Épuisé dans cette couleur pour le moment.'];
+}
+function drawPDP(){
+  const p=pdp.p, imgs=pdpImgs(p,pdp.ci), cur=imgs[Math.min(pdp.img,imgs.length-1)], c=p.colors[pdp.ci]?.name||'';
+  $('#pdpMain').className='pdp-main'+(cur.cut?' cut':'');
+  $('#pdpMain').innerHTML = (p.old?`<span class="flag-new promo">-${Math.round((1-p.price/p.old)*100)} %</span>`:'') + pic(cur.src,`${p.name} · ${c}`);
+  $('#pdpThumbs').innerHTML = imgs.length>1 ? imgs.map((x,i)=>`<button class="${i===pdp.img?'on':''}${x.cut?' cut':''}" data-i="${i}" aria-label="Photo ${i+1}">${pic(x.src,'')}</button>`).join('') : '';
+  $('#pdpTag').textContent = p.tags.includes('best')?'Best-seller':p.tags.includes('new')?'Nouveauté':'';
+  $('#pdpName').textContent=p.name; $('#pdpPrice').innerHTML=priceHTML(p)+(p.old?`<span class="save" style="margin-left:6px">Vous économisez ${money(p.old-p.price)}</span>`:'');
+  $('#pdpHook').textContent=p.hook||'';
+  $('#pdpColorName').textContent=c;
+  $('#pdpColors').innerHTML=p.colors.map((k,i)=>`<button class="${i===pdp.ci?'on':''}" style="background:${k.hex}" data-c="${i}" aria-label="${esc(k.name)}" title="${esc(k.name)}"></button>`).join('');
+  $('#pdpSizes').innerHTML=p.sizes.map(z=>`<button data-s="${z}" class="${pdp.size===z?'on':''}" ${isOut(p,c,z)?'disabled title="Épuisé"':''}>${z}</button>`).join('');
+  const [cls,txt]=stockText(p); const st=$('#pdpStock'); st.className='pdp-stock'+(cls?' '+cls:''); st.textContent=txt;
+  $('#pdpQty').textContent=pdp.qty;
+  $('#pdpAdd').textContent = pdp.size ? `Ajouter au panier · ${money(p.price*pdp.qty)}` : 'Ajouter au panier';
+  $('#pdpDesc').innerHTML = `<p>${esc(p.desc||'')}</p>${(p.points||[]).length?`<ul class="points">${p.points.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${p.tip?`<p><b>Comment le porter :</b> ${esc(p.tip)}</p>`:''}`;
+  $('#pdpComp').textContent = `Matière : ${p.matiere}.` + (p.care ? ` Entretien : ${p.care}` : ' Conseils d\'entretien : reportez-vous à l\'étiquette du vêtement.');
+  $('#pdpShip').innerHTML = `Livraison partout au Maroc en 24 à 72 h selon votre ville. Offerte dès ${FREE_SHIP_ITEMS} articles ou dès ${money(FREE_SHIP)}. ${PAYMENT_METHODS.map(m=>m.label).join(' ou ')}.`;
+  $('#pdpReturns').textContent = RETURNS_POLICY || 'Une question sur un échange de taille ? Écrivez-nous sur WhatsApp avant tout envoi : nous vous répondons rapidement.';
+  $('#pdpColl').textContent=COLLECTIONS[p.collection]?.crumb||''; $('#pdpCrumb').textContent=p.name;
+  const n=cart.reduce((s,i)=>s+i.qty,0); $('#pdpCount').textContent=n; $('#pdpCount').hidden=!n;
+}
+function showPDP(p,ci){
+  const av=p.sizes.filter(z=>!isOut(p,p.colors[ci]?.name||'',z));
+  pdp={p,ci,size:av.length===1?av[0]:null,qty:1,img:0};
+  $('#pdpMore').innerHTML=fitList().filter(x=>x!==p).sort((a,b)=>(b.collection===p.collection)-(a.collection===p.collection)||b.id-a.id).slice(0,4).map(miniCard).join('');
+  drawPDP(); $('#pdp').hidden=false; $('#pdp').scrollTop=0; document.body.style.overflow='hidden';
+  document.title=`${p.name} | GAF STUDIO`;
+  $$('#pdpMore .reveal').forEach(el=>el.classList.add('in'));
+}
+function hidePDP(){ $('#pdp').hidden=true; document.title=baseTitle; if(!$('#drawer').classList.contains('open')) document.body.style.overflow=''; }
+function openPDP(id,ci=0){
+  const p=getP(id); if(!p) return; pdpCi=ci; closeQV(); closeCart(); closeMenu();
+  const h='#'+slug(p); if(location.hash===h) showPDP(p,ci); else location.hash=h;
+}
+function route(){
+  const h=location.hash.slice(1), p=fitList().find(x=>slug(x)===h);
+  if(p) showPDP(p,pdpCi); else if(!$('#pdp').hidden) hidePDP();
+  pdpCi=0;
+}
+addEventListener('hashchange',route);
+$('#pdpBack').addEventListener('click',()=>{ location.hash='produits'; });
+$('#pdpCart').addEventListener('click',openCart);
+$('#pdp').addEventListener('click',e=>{
+  const t=e.target.closest('[data-i]'); if(t){ const x=pdpImgs(pdp.p,pdp.ci)[+t.dataset.i]; if(x.ci!==pdp.ci){ pdp.ci=x.ci; pdp.img=0; } else pdp.img=+t.dataset.i; return drawPDP(); }
+  const c=e.target.closest('#pdpColors [data-c]'); if(c){ pdp.ci=+c.dataset.c; pdp.img=0; if(pdp.size && isOut(pdp.p,pdp.p.colors[pdp.ci].name,pdp.size)) pdp.size=null; return drawPDP(); }
+  const s=e.target.closest('#pdpSizes [data-s]'); if(s && !s.disabled){ pdp.size=s.dataset.s; return drawPDP(); }
+});
+$('#pdpMain').addEventListener('pointermove',e=>{ const im=$('#pdpMain img'); if(!im) return; const r=e.currentTarget.getBoundingClientRect(); im.style.transformOrigin=`${(e.clientX-r.left)/r.width*100}% ${(e.clientY-r.top)/r.height*100}%`; });
+$('#pdpMinus').addEventListener('click',()=>{ pdp.qty=Math.max(1,pdp.qty-1); drawPDP(); });
+$('#pdpPlus').addEventListener('click',()=>{ pdp.qty=Math.min(10,pdp.qty+1); drawPDP(); });
+$('#pdpAdd').addEventListener('click',()=>{
+  if(!pdp.size){ const r=$('#pdpSizes'); r.classList.remove('shake'); void r.offsetWidth; r.classList.add('shake'); r.scrollIntoView({behavior:'smooth',block:'center'}); return toast('Choisissez votre taille pour continuer. Un doute ? Le guide des tailles est juste au-dessus.'); }
+  addToCart(pdp.p.id, pdp.size, pdp.p.colors[pdp.ci]?.name||'', pdp.qty); drawPDP(); setTimeout(openCart,250);
+});
+$('#pdpAsk').addEventListener('click',()=>{
+  const p=pdp.p, c=p.colors[pdp.ci]?.name;
+  const m=`Bonjour GAF STUDIO 🌸 J'ai une question sur le ${p.name}${c?` (couleur ${c}${pdp.size?`, taille ${pdp.size}`:''})`:''} :`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(m)}`,'_blank','noopener');
+});
+$('#pdp360').addEventListener('click',()=>{
+  const p=pdp.p, ci=pdp.ci, av=p.sizes.filter(z=>!isOut(p,p.colors[ci]?.name||'',z));
+  fit={p,ci,size:pdp.size||(av.length===1?av[0]:null)}; fitDraw(true); location.hash='mix';
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('#pdp').hidden && !$('#drawer').classList.contains('open') && !$('#sg').classList.contains('open') && $('#co').hidden) location.hash='produits'; });
+{ const _u=updateCart; updateCart=function(b){ _u(b); if(!$('#pdp').hidden && pdp.p){ const n=cart.reduce((s,i)=>s+i.qty,0); $('#pdpCount').textContent=n; $('#pdpCount').hidden=!n; } }; }
+
+/* ---------- panier : changer la taille d'un article ---------- */
+function changeSize(key,size){
+  const it=cart.find(i=>i.key===key); if(!it||it.size===size) return;
+  const nk=`${it.id}|${size}|${it.color}`, ex=cart.find(i=>i.key===nk);
+  if(ex){ ex.qty+=it.qty; cart=cart.filter(i=>i!==it); } else { it.size=size; it.key=nk; }
+  store.set('gaf_cart',cart); updateCart(); toast(`Taille modifiée : ${size}`);
+}
+$('#items').addEventListener('change',e=>{ const s=e.target.closest('[data-size-k]'); if(s) changeSize(s.dataset.sizeK,s.value); });
+
+/* ---------- modes de paiement ---------- */
+$('#payList').innerHTML=PAYMENT_METHODS.map((m,i)=>`<label class="pay-opt"><input type="radio" name="paiement" value="${esc(m.id)}" ${i?'':'checked'}><span><b>${esc(m.label)}</b><small>${esc(m.desc||'')}</small></span></label>`).join('');
+const payLabel=()=>{ const v=document.querySelector('#payList input:checked')?.value; return (PAYMENT_METHODS.find(m=>m.id===v)||PAYMENT_METHODS[0]).label; };
+
+route();
+
 buildFilters(); render(); updateCart(); updateWish(); watch();
 </script>
 </body>
